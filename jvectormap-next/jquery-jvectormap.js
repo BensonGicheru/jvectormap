@@ -235,7 +235,11 @@ if (!Array.prototype.indexOf) {
       map = new jvm.Map(options);
     }
 
-    return jvm;
+    return this;
+  };
+
+  $.fn.getJVM = function () {
+    return jvm
   };
 }));
 /*! Copyright (c) 2013 Brandon Aaron (http://brandon.aaron.sh)

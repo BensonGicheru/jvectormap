@@ -52,6 +52,10 @@
       map = new jvm.Map(options);
     }
 
-    return jvm;
+    return this;
+  };
+
+  $.fn.getJVM = function () {
+    return jvm
   };
 }));
