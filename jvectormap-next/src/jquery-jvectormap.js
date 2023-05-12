@@ -52,6 +52,6 @@
       map = new jvm.Map(options);
     }
 
-    return this;
+    return jvm;
   };
 }));
