@@ -103,7 +103,14 @@ jvm.MultiMap.prototype = {
     this.drillDownPromise.then(function(){
       currentMap.params.container.hide();
       if (!that.maps[name]) {
-        that.addMap(name, {map: name, multiMapLevel: currentMap.params.multiMapLevel + 1});
+        that.addMap(name, {
+          map: name,
+          multiMapLevel: currentMap.params.multiMapLevel + 1,
+          backgroundColor: that.params.main.backgroundColor,
+          series: that.params.main.series,
+          regionStyle: that.params.main.regionStyle,
+          onRegionTipShow: that.params.main.onRegionTipShow,
+        });
       } else {
         that.maps[name].params.container.show();
       }
