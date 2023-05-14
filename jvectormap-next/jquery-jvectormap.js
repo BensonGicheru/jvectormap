@@ -3336,7 +3336,7 @@ jvm.MultiMap.prototype = {
             mapName = multimap.params.mapNameByCode(code, multimap);
 
         if (!multimap.drillDownPromise || multimap.drillDownPromise.state() !== 'pending') {
-          multimap.drillDown(mapName, code, this.params.animateMultimapDrillDown);
+          multimap.drillDown(mapName, code, multimap.params.animateMultimapDrillDown);
         }
       });
     }
