@@ -3302,6 +3302,7 @@ jvm.MultiMap = function(params) {
   this.maps = {};
   this.params = jvm.$.extend(true, {}, jvm.MultiMap.defaultParams, params);
   this.params.maxLevel = this.params.maxLevel || Number.MAX_VALUE;
+  this.params.animateMultimapDrillDown = this.params.animateMultimapDrillDown || true;
   this.params.main = this.params.main || {};
   this.params.main.multiMapLevel = 0;
   this.history = [ this.addMap(this.params.main.map, this.params.main) ];
@@ -3335,7 +3336,7 @@ jvm.MultiMap.prototype = {
             mapName = multimap.params.mapNameByCode(code, multimap);
 
         if (!multimap.drillDownPromise || multimap.drillDownPromise.state() !== 'pending') {
-          multimap.drillDown(mapName, code);
+          multimap.drillDown(mapName, code, this.params.animateMultimapDrillDown);
         }
       });
     }
@@ -3361,10 +3362,10 @@ jvm.MultiMap.prototype = {
     return deferred;
   },
 
-  drillDown: function(name, code){
+  drillDown: function(name, code, animate){
     var currentMap = this.history[this.history.length - 1],
         that = this,
-        focusPromise = currentMap.setFocus({region: code, animate: true}),
+        focusPromise = currentMap.setFocus({region: code, animate: animate}),
         downloadPromise = this.downloadMap(code);
 
     focusPromise.then(function(){
