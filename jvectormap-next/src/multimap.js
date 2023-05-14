@@ -26,7 +26,8 @@ jvm.MultiMap = function(params) {
   this.maps = {};
   this.params = jvm.$.extend(true, {}, jvm.MultiMap.defaultParams, params);
   this.params.maxLevel = this.params.maxLevel || Number.MAX_VALUE;
-  this.params.animateMultimapDrillDown = this.params.animateMultimapDrillDown || true;
+  this.params.drillDownEnabled = this.params.drillDownEnabled || true;
+  this.params.animateDrillDown = this.params.animateDrillDown || true;
   this.params.main = this.params.main || {};
   this.params.main.multiMapLevel = 0;
   this.history = [ this.addMap(this.params.main.map, this.params.main) ];
@@ -59,8 +60,8 @@ jvm.MultiMap.prototype = {
         var multimap = e.data.scope,
             mapName = multimap.params.mapNameByCode(code, multimap);
 
-        if (!multimap.drillDownPromise || multimap.drillDownPromise.state() !== 'pending') {
-          multimap.drillDown(mapName, code, multimap.params.animateMultimapDrillDown);
+        if (multimap.drillDownEnabled && (!multimap.drillDownPromise || multimap.drillDownPromise.state() !== 'pending')) {
+          multimap.drillDown(mapName, code, multimap.params.animateDrillDown);
         }
       });
     }
